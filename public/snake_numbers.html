@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/snake_numbers_style.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <title>Snake numbers</title>
+</head>
+<body>
+    <header>
+        <div>
+            <a class="back" href="/menu.html">Назад</a>
+        </div>
+    </header>
+    <div class="number_block" id="number_block">
+        <h1>Соедини числа одинаковые или по возрастанию!</h1>
+        <div class="body2 d_none" id="body2">
+            <div id="points"></div>
+            <div id="game-board" class="game-board">
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+                <div id="cell" class="cell"></div>
+            </div>
+
+        </div>
+        
+        <button class="start_continue" id="start_continue">Начать</button>
+    </div>
+
+    <div class="window d_none" id="window">
+        <h2>Ваши результаты</h2>
+        <div class="win_el" id="res"></div>
+        <div class="win_el" id="record"></div>
+        <button class="okey" id="okey">ok</button>
+    </div>
+
+
+    <script type="module" src="/js/fb/firebase.js"></script>
+    <script type="module" src="js/snake_numbers.js"></script>
+    
+</body>
+</html>

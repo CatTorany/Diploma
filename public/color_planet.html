@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/color_planet.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <title>Color block</title>
+</head>
+<body>
+    <header>
+        <div>
+            <a class="back" href="/menu.html">Назад</a>
+        </div>
+    </header>
+    <div class="color_block" id="color_block">
+        <h1>Нажимай на планеты и подбери им правильный цвет!</h1>
+        <div class="header_2 d_none">
+            <div id="points"></div>
+            <div class="hearts">
+                <div class="heart">
+                    <img class="live" id="live_1" src="/css/hearts/live.png">
+                    <img class="death d_none" id="death_1" src="/css/hearts/death.png">
+                </div>
+                <div class="heart">
+                    <img class="live" id="live_2" src="/css/hearts/live.png">
+                    <img class="death d_none" id="death_2" src="/css/hearts/death.png">
+                </div>
+                <div class="heart">
+                    <img class="live" id="live_3" src="/css/hearts/live.png">
+                    <img class="death d_none" id="death_3" src="/css/hearts/death.png">
+                </div>
+                
+            </div>
+        </div>
+        <div id="game-board" class="game-board d_none">
+            <div id="cell" class="cell"></div>
+            <div id="cell" class="cell"></div>
+            <div id="cell" class="cell"></div>
+            <div id="cell" class="cell"></div>
+            <div id="cell" class="cell"></div>
+            <div id="cell" class="cell"></div>
+            <div id="cell" class="cell"></div>
+            <div id="cell" class="cell"></div>
+            <div id="cell" class="cell"></div>
+        </div>
+        <button class="start_continue" id="start_continue">Начать</button>
+        <button class="end d_none" id="end">Закончить</button>
+    </div>
+
+    <div class="window d_none" id="window">
+        <h2>Ваши результаты</h2>
+        <div class="win_el" id="res"></div>
+        <div class="win_el" id="record"></div>
+        <button class="okey" id="okey">ok</button>
+    </div>
+    
+    <script type="module" src="/js/fb/firebase.js"></script>
+    <script type="module" src="js/color_planet.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/menu_style.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <title>Меню</title>
+</head>
+<body>
+    <div class="form" id="form">
+        <div id="username_">Hello, <span id="username"></span>!</div>
+        <button class="image" id="image"><img src="/img/9459312.png" alt=""></button>
+        <div class="element"><a href="/Guide.html">Guide</a></div>
+        <div class="element"><a href="/puzzle_30.html">Puzzle 30</a></div>
+        <div class="element"><a href="/color_planet.html">Color planet</a></div>
+        <div class="element"><a href="/snake_numbers.html">Snake numbers</a></div>
+        <div class="element"><a href="/quiz.html">Quiz</a></div>
+        <button class="element exit" type="submit" id="singOut">Exit</button>
+    </div>
+    <div class="window d_none" id="window">
+        <h2>Ваши результаты</h2>
+        <div class="win_el" id="Puzzle30"><span>Puzzle 30: </span></div>
+        <div class="win_el" id="ColorPlanet"><span>Color planet: </span></div>
+        <div class="win_el" id="SnakeNumbers"><span>Snake numbers: </span></div>
+        <div class="win_el" id="Quiz"><span>Quiz: </span></div>
+        <button class="okey" id="okey">ok</button>
+    </div>
+
+    <script type="module" src="/js/fb/firebase.js"></script>
+    <script type="module" src="/js/fb/user_auth_now.js"></script>
+    <script type="module" src="/js/fb/exit.js"></script>
+    
+</body>
+</html>

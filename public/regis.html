@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/auth_style.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <title>Регистрация</title>
+</head>
+<body>
+    <div class="form">
+        <div class="reg">
+            <h1>Регистрация</h1> 
+            <input type="text" placeholder="Логин" id="login">
+            <input type="text" placeholder="Почта" id="email">
+            <input type="password" placeholder="Пароль" id="password">
+            <input type="password" placeholder="Повтор пароля" id="repeat_password">
+            <div class="button"><button type="submit" id="signUp">Зарегистрироваться</button></div>
+        </div>
+        <div class="a"><a href="/index.html">Авторизация</a></div>
+    </div>
+
+    <script type="module" src="/js/fb/firebase.js"></script>
+    <script type="module" src="/js/fb/registration.js"></script>
+    
+    
+</body>
+</html>
