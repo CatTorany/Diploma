@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #333 url(fon/1678694512_bogatyr-club-p-kosmicheskii-pikselnii-fon-foni-instagram-22.jpg); /* Фоновый цвет и фоновый рисунок*/
+    color: #fafafa; /*Цвет текста на странице*/
+	/* background-attachment: fixed; */
+    object-fit: cover;
+    background-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    user-select: none;
+    font-family: 'VT323', monospace;
+}
+
+.back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(235, 227, 218, 0.3);
+	color: #fff;
+	text-decoration: none;
+	border-bottom-right-radius: 3vmin;
+    font-family: 'Caveat', cursive;
+    font-size: 5vmin;
+    padding: 1%;
+    padding-right: 3vmin;
+}
+
+.block {
+    margin-top: 2vmin;
+    text-align: center;        
+}
+
+#points {
+    float: left;
+    font-size: 3vmin;
+}
+
+.game-board {
+    user-select: none;
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+    /* height: 100vh; */
+    position: relative;
+    display: grid;
+    
+    gap: 2vmin;
+    border-radius: 1vmin;
+    text-align: center;
+    
+}
+
+.cell {
+    background-color: rgb(158, 212, 198, 0.9);
+    border-radius: 1vmin;
+    border: 1vmin solid rgba(52, 26, 158, 0.605);
+    text-align: center;
+    font-size: 9vmin;
+    font-family: 'VT323', monospace;
+    color: #333;
+    height: 30vmin;
+    padding-top: 9vmin;
+}
+
+.cell2 {
+    margin-top: 5vmin;
+    margin-bottom: 5vmin;
+    text-align: center;
+    font-family: 'VT323', monospace;
+
+}
+
+.word_cell {
+    display: inline-block;
+    background-color: rgb(158, 212, 198, 0.9);
+    border-radius: 1vmin;
+    border: 1vmin solid rgba(52, 26, 158, 0.605);  
+    width: 30vmin;
+    height: 18vmin; 
+    font-size: 4vmin;
+    color: #333;
+}
+
+.word_cell:hover{
+    background-color: rgba(211, 224, 221, 0.9);    
+}
+
+#w2 {
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+}
+
+
+
+#start_continue, #end {
+    font-size: 4vmin; 
+    padding: 1vmin;
+    border-radius: 3vmin;
+    background: rgba(97, 100, 177, 0.942);
+	color: #fff;
+    cursor: pointer; 
+    border: 0.5vmin solid rgba(52, 26, 158, 0.605);
+} 
+
+
+#start_continue:hover,#end:hover{
+    background: rgba(235, 227, 218, 0.659);
+}
+
+
+.TrueRes, .TrueRes:hover{
+    background-color: greenyellow;
+    filter: brightness(100%);
+}
+
+.FalseRes, .FalseRes:hover {
+    background-color: red;
+    filter: brightness(100%);
+}
+
+.header_2 {
+    height: 5vmin;
+    margin-top: 1vmin;
+}
+.hearts {
+    float: right;
+    background: #3d43bd9a;
+    border-radius: 2vmin;
+}
+.heart {
+    display: inline-block;
+    /* border: 1vmin solid rgba(146, 159, 230, 0.603); */
+    width: 5vmin;
+    height: 5vmin;
+    
+}
+
+.live, .death {
+    width: 5vmin;
+    height: 5vmin;  
+}
+
+.d_none {
+    display: none;
+}
+
+h1 {
+    
+    text-align: center;
+    color: white;
+    font-size: 5vmin;
+    margin: 1vmin;
+}
+
+.bl {
+    pointer-events: none;
+}
+
+
+.window {
+    position: absolute;
+    top: 9vmin;
+    width: auto;
+    background-color: rgb(188, 159, 214, 1);
+    font-size: 5vmin;
+    border-radius: 5vmin;
+    text-align: center;
+}
+
+h2 {
+    margin: 2vmin;
+    font-size: 7vmin;
+    text-decoration: underline;
+
+}
+
+.okey {
+    margin-top: 3vmin;
+    margin-bottom: 2vmin;
+    background-color: rgba(190, 135, 238, 0.938);
+    border: 0.3vmin solid white;
+    border-radius: 5vmin;
+    color: white;
+    font-size: 5vmin;
+    padding: 1vmin;
+}
+
+.okey:hover {
+    background-color: rgba(168, 113, 212, 0.822);
+}

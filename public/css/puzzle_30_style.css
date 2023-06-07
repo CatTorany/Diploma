@@ -1,0 +1,152 @@
+body{
+	background: #000 url(fon/1625510687_22-kartinkin-com-p-pikselnii-fon-kosmos-krasivie-foni-23.jpg); /* Фоновый цвет и фоновый рисунок*/
+	color: #fafafa; /*Цвет текста на странице*/
+	/* background-attachment: fixed; 
+	background-repeat: repeat-x; 
+    background-repeat: repeat-x;
+	background-size: 100%; */
+    font-family: 'VT323', monospace;
+    object-fit: cover;
+    background-size: 100%;
+
+}
+
+.game {
+    text-align: center;
+    user-select: none;    
+}
+
+.page{
+    /* max-width: 37%;
+    margin: 0 auto; */ 
+
+    width: 100%;
+	margin-top: 3vmin;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thirty{
+    /* margin: 0 auto;
+    width: 100%;
+    padding-bottom: 100%;
+    background: rgba(220, 188, 227, 0.466);
+    margin-bottom: 1vmin;
+    position: relative;
+    border-radius: 1%; */
+
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 13vmin);
+    grid-template-rows: repeat(5, 16vmin);
+    gap: 1vmin;
+	padding-top: 1vmin;
+	padding-bottom: 1vmin;
+    border-radius: 1vmin;
+	font-size: 15vmin;
+	background: rgba(235, 227, 218, 0.3);
+}
+
+.item{
+    position: absolute; 
+    left: 0;
+    top: 0; 
+    width: 16.6667%;
+    height: 20%; 
+    margin: 0;
+    padding: 0;
+    background: rgba(171, 218, 234, 1);
+    color: rgb(71, 10, 90);
+    cursor: pointer;
+    border-radius: 10%;
+    border-color: rgb(188, 159, 214);
+    font-size: 10vmin;
+    font-family: 'VT323', monospace;
+    transition: transform 0.2s, filter 0.5s;
+}
+
+.mixing, .begin{  
+	font-size: 4vmin;
+	background: rgba(235, 227, 218, 0.3);
+	color: #fff;
+	border-radius: 3vmin;
+    cursor: pointer;
+	padding: 2vmin;
+}
+
+.mixing:hover,.begin:hover{
+    background: rgba(235, 227, 218, 0.659);
+}
+
+h1{
+    margin: 1vmin;
+    font-size: 5vmin;
+}
+
+#timer {
+    font-size: 4vmin;
+}
+
+.back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(235, 227, 218, 0.3);
+	color: #fff;
+	text-decoration: none;
+	border-bottom-right-radius: 3vmin;
+    font-family: 'Caveat', cursive;
+    font-size: 5vmin;
+    padding: 1%;
+    padding-right: 3vmin;
+}
+
+.thirtyWon .item {
+    filter: brightness(200%);
+}
+
+.gameMixing{
+    pointer-events: none;
+    opacity: 0.7;
+} 
+
+.window {
+    position: absolute;
+    top: 9vmin;
+    width: auto;
+    background-color: rgb(188, 159, 214, 1);
+    font-size: 5vmin;
+    border-radius: 5vmin;
+    text-align: center;
+}
+
+h2 {
+    margin: 2vmin;
+    font-size: 7vmin;
+    text-decoration: underline;
+
+}
+
+.okey {
+    margin-top: 3vmin;
+    margin-bottom: 2vmin;
+    background-color: rgba(190, 135, 238, 0.938);
+    border: 0.3vmin solid white;
+    border-radius: 5vmin;
+    color: white;
+    font-size: 5vmin;
+    padding: 1vmin;
+}
+
+.okey:hover {
+    background-color: rgba(168, 113, 212, 0.822);
+}
+
+.d_none {
+    display: none;
+}
+
+.block{
+    pointer-events: none;
+} 

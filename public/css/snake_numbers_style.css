@@ -1,0 +1,189 @@
+body {
+    background: #333 url(fon/1652252346_18-celes-club-p-kosmos-piksel-art-krasivo-23.png); /* Фоновый цвет и фоновый рисунок*/
+    color: #fafafa; /*Цвет текста на странице*/
+	/* background-attachment: fixed; */
+    object-fit: cover;
+    background-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    font-family: 'VT323', monospace;
+}
+
+.body2 {
+    padding: 1vmin;
+    margin-bottom: 1vmin;
+    background-color: rgba(137, 127, 127, 0.6);
+    border-radius: 2vmin;
+}
+.number_block {
+    text-align: center;
+}
+
+#points {
+    font-size: 3vmin;
+}
+
+.back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(235, 227, 218, 0.3);
+	color: #fff;
+	text-decoration: none;
+	border-bottom-right-radius: 3vmin;
+    font-family: 'Caveat', cursive;
+    font-size: 5vmin;
+    padding: 1%;
+    padding-right: 3vmin;
+}
+
+.game-board {
+    user-select: none;
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(6, 12vmin);
+    grid-template-rows: repeat(6, 12vmin);
+    gap: 2vmin;
+    border-radius: 1vmin;
+}
+
+.cell {
+    background-color: #444;
+    border-radius: 1vmin;
+    border: 0.5vmin solid rgba(52, 26, 158, 0.605);
+    font-size: 5vmin;
+    font-family: 'VT323', monospace;
+    text-align: center;
+    background-color: aliceblue;
+    padding-top: 3vmin;
+    color: black;
+    transition: transform 0.2s, filter 0.5s;
+}
+
+#start_continue, #end {
+    font-size: 4vmin; 
+    padding: 1vmin;
+    border-radius: 3vmin;
+    background: rgba(114, 115, 146, 0.942);
+	color: #fff;
+    cursor: pointer; 
+    border: 0.5vmin solid rgba(52, 26, 158, 0.605);
+} 
+
+
+#start_continue:hover,#end:hover{
+    background: rgba(235, 227, 218, 0.659);
+}
+
+h1 {
+    width: 79vmin;
+    text-align: center;
+    color: white;
+    font-size: 5vmin;
+    margin: 1vmin;
+}
+
+
+.back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(235, 227, 218, 0.3);
+	color: #fff;
+	text-decoration: none;
+	border-bottom-right-radius: 3vmin;
+    font-family: 'Caveat', cursive;
+    font-size: 5vmin;
+    padding: 1%;
+    padding-right: 3vmin;
+}
+
+.one {
+    background-color: #edff31;
+}
+.two {
+    background-color: #84ff31;
+}
+
+.three {
+    background-color: #32fea2;
+}
+
+.four {
+    background-color: #36fbfa;
+}
+
+.five {
+    background-color: #3184ff;
+}
+
+.six {
+    background-color: #9c3af6;
+}
+
+.seven {
+    background-color: #ff31f9;
+}
+
+.eight {
+    background-color: #fb3699;
+}
+
+.nine {
+    background-color: #ff3d31;
+}
+
+.ten {
+    background-color: #ff8131;
+}
+
+.dop {
+    filter: brightness(900%);
+}
+
+
+
+
+.d_none {
+    display: none;
+}
+
+.block{
+    pointer-events: none;
+} 
+
+.window {
+    position: absolute;
+    top: 9vmin;
+    width: auto;
+    background-color: rgb(188, 159, 214, 1);
+    font-size: 5vmin;
+    border-radius: 5vmin;
+    text-align: center;
+}
+
+h2 {
+    margin: 2vmin;
+    font-size: 7vmin;
+    text-decoration: underline;
+
+}
+
+.okey {
+    margin-top: 3vmin;
+    margin-bottom: 2vmin;
+    background-color: rgba(190, 135, 238, 0.938);
+    border: 0.3vmin solid white;
+    border-radius: 5vmin;
+    color: white;
+    font-size: 5vmin;
+    padding: 1vmin;
+}
+
+.okey:hover {
+    background-color: rgba(168, 113, 212, 0.822);
+}

@@ -1,0 +1,74 @@
+body{
+	background: #000 url(fon/1679223886_bogatyr-club-p-pikselnii-kosmos-fon-foni-oboi-30.png); /* Фоновый цвет и фоновый рисунок*/
+	color: #fafafa; /*Цвет текста на странице*/
+    font-family: 'VT323', monospace;
+    object-fit: cover;
+    background-size: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+
+.reg {
+    background: rgba(163, 173, 186, 0.658);
+    border-radius: 3vmin;
+
+
+}
+
+input {
+    display: block;
+    font-size: 4vmin;
+
+    width: 50vmin;
+    height: 7vmin;
+    
+}
+
+h1 {
+    padding-top: 3vmin;
+    text-align: center;
+    font-size: 6vmin;
+
+}
+
+.button {
+    text-align: center;  
+}
+
+button {
+    font-size: 4vmin;
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+    border-radius: 2vmin;
+    background-color: rgb(164, 167, 221, 0.659);
+    color: #000;
+}
+
+button:hover{
+    background: rgba(164, 167, 221, 1);
+    color: white;
+}
+
+
+
+a {
+    color: white;
+    font-size: 4vmin;
+}
+a:hover {
+    color: rgba(164, 167, 221); 
+  }
+
+.a {
+    text-align: center;      
+}
+
+.block{
+    pointer-events: none;
+}
+
