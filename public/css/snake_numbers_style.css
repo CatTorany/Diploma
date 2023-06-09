@@ -12,7 +12,7 @@ body {
 }
 
 .body2 {
-    padding: 1vmin;
+    padding: 0.5svmin;
     margin-bottom: 1vmin;
     background-color: rgba(137, 127, 127, 0.6);
     border-radius: 2vmin;
@@ -41,13 +41,13 @@ body {
 
 .game-board {
     user-select: none;
-    margin-top: 2vmin;
-    margin-bottom: 2vmin;
+    margin-top: 1vmin;
+    margin-bottom: 0.5vmin;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(6, 12vmin);
-    grid-template-rows: repeat(6, 12vmin);
-    gap: 2vmin;
+    grid-template-columns: repeat(6, 13vmin);
+    grid-template-rows: repeat(6, 13vmin);
+    gap: 0.5vmin;
     border-radius: 1vmin;
 }
 

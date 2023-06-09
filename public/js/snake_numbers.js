@@ -76,6 +76,7 @@ document.getElementById('start_continue').addEventListener('click', () => {
     }
 })
 
+// окошко с результатом
 document.getElementById('okey').addEventListener('click', () => {
     document.getElementById('number_block').classList.remove('block');
     document.getElementById('window').classList.add('d_none');
@@ -85,6 +86,53 @@ document.getElementById('okey').addEventListener('click', () => {
 // Переменные для хранения текущих классов блоков и флага нажатия ЛКМ
 let cellClasses = [];
 let isMouseDown = false;
+let relatedTargetCoords = {                
+    x: 0,
+    y: 0,
+};
+
+
+document.getElementById('game-board').addEventListener('mouseup', () => {
+    if (startGameBool && isMouseDown) 
+        {
+            isMouseDown = false;
+            for(let i = 0; i < cellClasses.length; i++)
+            {
+                cellClasses[i].classList.remove("dop");
+            }
+
+            // если цепочка от 1 до 10
+            if (orderBool(cellClasses))
+            {
+                for(let x = 0; x<cellClasses.length; x++)
+                {
+                    points += x+1;
+                    cellClasses[x].innerText = "";
+                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
+                }
+
+                fillingMatrix();
+            }
+
+            // если цепочка одинаковая
+            if (duplicateBool(cellClasses))
+            {
+                for(let x = 0; x<cellClasses.length; x++)
+                {
+                    points += 1;
+                    cellClasses[x].innerText = "";
+                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
+                }
+
+                fillingMatrix();
+            }
+
+            divPoints.innerText = "Очки: " + points;
+            
+        }
+        cellClasses = [];
+}) 
+
 
 // Навешиваем обработчики событий на каждый блок
 cellNodes.forEach(block => {
@@ -92,10 +140,60 @@ cellNodes.forEach(block => {
     block.addEventListener('mousedown', (event) => {
         if (startGameBool) 
         {
+            
+            isMouseDown = false;
+            for(let i = 0; i < cellClasses.length; i++)
+            {
+                cellClasses[i].classList.remove("dop");
+            }
+
+            // если цепочка от 1 до 10
+            if (orderBool(cellClasses))
+            {
+                for(let x = 0; x<cellClasses.length; x++)
+                {
+                    points += x+1;
+                    cellClasses[x].innerText = "";
+                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
+                }
+
+                fillingMatrix();
+            }
+
+            // если цепочка одинаковая
+            if (duplicateBool(cellClasses))
+            {
+                for(let x = 0; x<cellClasses.length; x++)
+                {
+                    points += 1;
+                    cellClasses[x].innerText = "";
+                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
+                }
+
+                fillingMatrix();
+            }
+
+            divPoints.innerText = "Очки: " + points;
+            
+        
+            cellClasses = [];
+
             isMouseDown = true;
             cellClasses.push(event.target);
             event.target.classList.add("dop");
         }
+    });
+
+    // при зажатой ЛКМ перемещение (увод с блока)
+    block.addEventListener('mouseout', (event) => {
+        if (startGameBool){
+            if (isMouseDown) {      
+                 
+                // получаем координаты откуда увели мышь
+                relatedTargetCoords = findCoordinates(event.target, matrix);  
+                     
+            }
+        }    
     });
   
     // при зажатой ЛКМ перемещение (наведение на блок)
@@ -107,7 +205,21 @@ cellNodes.forEach(block => {
                 {
                     cellClasses.push(event.target);  
                     event.target.classList.add("dop");    
-                }      
+                } 
+                // получаем координаты куда навели мышь
+                let targetCoords = findCoordinates(event.target, matrix); 
+                // проверяем, возможно ли движение
+                let isValid = isValidForSwap(targetCoords, relatedTargetCoords);
+
+                // если движение не возможно
+                if (!isValid){
+                    isMouseDown = false;
+                    for(let i = 0; i < cellClasses.length; i++)
+                    {
+                        cellClasses[i].classList.remove("dop");
+                    }
+                    cellClasses = [];
+                }     
             }
         }    
     });
@@ -363,4 +475,22 @@ function fillingMatrix()
     }
 }
 
+// вычисляем координаты нажимаемой ячейки
+function findCoordinates(el, matrix){
+    for(let y = 0; y < matrix.length; y++){
+        for(let x = 0; x < matrix[y].length; x++){
+            if(matrix[y][x] === el){
+                return {x, y};
+            }
+        }
+    }
+    return null;
+}
 
+// проверяем возможность пережвижения ячейки
+function isValidForSwap(coosds1, coosds2){
+    const diffX = Math.abs(coosds1.x - coosds2.x);
+    const diffY = Math.abs(coosds1.y - coosds2.y);
+
+    return (diffX === 1 || diffY === 1) && (coosds1.x == coosds2.x || coosds1.y == coosds2.y);
+}

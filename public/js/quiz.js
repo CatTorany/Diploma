@@ -38,7 +38,7 @@ document.getElementById('start_continue').addEventListener('click', () => {
     // заполяем игровое поле названиями цветов и раскрашиваем блоки
     if (startButton.innerText === "Начать")
     {
-        sleep(3000).then(() => { 
+        sleep(6000).then(() => { 
             divPoints.innerText = "Очки: " + points;
             startButton.innerText = "Закончить";
             document.getElementsByClassName("header_2")[0].classList.remove("d_none");
@@ -87,8 +87,9 @@ cellNodes.forEach(block => {
             addClassResult(event.target, "TrueRes")
 
             word_answer = [];
+            word_question = "";
             letsPlay();
-            sleep(4000).then(() => { 
+            sleep(6000).then(() => { 
                 document.getElementById("word_q").innerText = word_question;
                 for(let i = 0; i < cellNodes.length; i++)
                 {
@@ -110,8 +111,9 @@ cellNodes.forEach(block => {
                 death_heard.classList.remove("d_none");
 
                 word_answer = [];
+                word_question = ""
                 letsPlay();
-                sleep(4000).then(() => { 
+                sleep(6000).then(() => { 
                     document.getElementById("word_q").innerText = word_question;
                     for(let i = 0; i < cellNodes.length; i++)
                     {
@@ -163,7 +165,7 @@ function addClassResult(containerBlock, resClass) {
 
         setTimeout(() => {
             containerBlock.classList.remove(resClass);
-        }, 3000)
+        }, 5000)
     }, 200)
  }
 
@@ -180,7 +182,7 @@ function letsPlay() {
     let num_word_answer = [];
     for(let i = 0; i<3; i++){
         let num = getRandomNumber(0, count+1);
-        while (num_word_answer.indexOf(num) > -1) { num = getRandomNumber(0, count); }
+        while (num_word_answer.indexOf(num) > -1) { num = getRandomNumber(0, count+1); }
         num_word_answer.push(String (getRandomNumber(0, count+1)));
     }
     let num_word_language = getRandomNumber(0, 2);  // 1 - русский вопрос/англ ответы, 0 - английский вопрос/рус ответы
@@ -191,7 +193,7 @@ function letsPlay() {
     let word_bd = "";
     let nodeRef = ref(db, 'quiz/' + num_word_answer[0]);
 
-    onValue(ref(db, 'quiz/'), (snapshot) => {
+    
         get(nodeRef).then((snapshot) => {
 
             if (num_word_language == 1) {
@@ -236,7 +238,7 @@ function letsPlay() {
 
             word_answer.push(word_bd);
 
-        });
+        
 });
     
 }

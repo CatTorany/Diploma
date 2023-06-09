@@ -32,6 +32,10 @@ body {
     color: white;
 }
 
+.element:hover {
+    background-color: rgb(188, 159, 214, 1);
+  }
+
 .exit {
     border: none;
     font-family: 'VT323', monospace;
@@ -46,10 +50,6 @@ a {
     text-decoration: none;
     color: white;
 }
-
-.element:hover {
-    background-color: rgb(188, 159, 214, 1);
-  }
 
 .image {
     width: 12vmin;
