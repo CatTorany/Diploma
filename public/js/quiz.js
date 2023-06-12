@@ -103,7 +103,7 @@ cellNodes.forEach(block => {
         {
             addClassResult(event.target, "FalseRes")
             death_heards += 1;
-            if (death_heards <= heards)
+            if (death_heards < heards)
             {
                 let live_heard = document.getElementById("live_" + death_heards);
                 let death_heard = document.getElementById("death_" + death_heards);
@@ -124,7 +124,7 @@ cellNodes.forEach(block => {
 
                 
             }
-            if (death_heards > heards)
+            if (death_heards >= heards)
             {
                 document.getElementById("word_a").classList.remove("bl");
                 death_heards = 0;

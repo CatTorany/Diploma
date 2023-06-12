@@ -73,6 +73,7 @@ body {
     margin-bottom: 5vmin;
     text-align: center;
     font-family: 'VT323', monospace;
+    height: 18vmin;
 
 }
 
@@ -81,10 +82,11 @@ body {
     background-color: rgb(158, 212, 198, 0.9);
     border-radius: 1vmin;
     border: 1vmin solid rgba(52, 26, 158, 0.605);  
-    width: 30vmin;
-    height: 18vmin; 
+    width: 31vmin;
+    height: 100%; 
     font-size: 4vmin;
     color: #333;
+    vertical-align: bottom;
 }
 
 .word_cell:hover{

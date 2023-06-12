@@ -97,7 +97,7 @@ document.getElementById('start_continue').addEventListener('click', () => {
         else
         {
             death_heards += 1;
-            if (death_heards <= heards)
+            if (death_heards < heards)
             {
                 let live_heard = document.getElementById("live_" + death_heards);
                 let death_heard = document.getElementById("death_" + death_heards);
@@ -109,7 +109,7 @@ document.getElementById('start_continue').addEventListener('click', () => {
                 startButton.classList.remove("block");
                 document.getElementById("end").classList.remove("block");
             }
-            if (death_heards > heards)
+            if (death_heards >= heards)
             {
                 death_heards = 0;
                 endGame();
