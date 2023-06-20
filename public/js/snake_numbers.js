@@ -16,7 +16,16 @@ const countItems = 36;
 let numberArray = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 let startGameBool = false;
 const divPoints = document.getElementById('points');
+const hod = document.getElementById('hod');
+const chat = document.getElementById('chat');
 let points = 0;
+const heards = document.getElementsByClassName("heart").length;
+let death_heards = 0;
+
+let countChain = 0;  // кол-во цепочек для сбора
+let countBlock = 0;  // кол-во блоков для сбора
+
+
 
 // проверяем количество ячеек на html-странице
 if (cellNodes.length !== countItems){
@@ -44,35 +53,8 @@ document.getElementById('start_continue').addEventListener('click', () => {
     }
     else if (document.getElementById('start_continue').innerText === "Закончить")
     {
-        // очищаем поле
-        clearInnerText();
-        
-        // отправляем результат в базу
-        let rezult = 0;
-        let dub_points = points;
-        document.getElementById("record").innerText = "";
-
-        // записываем результат в бд
-        onValue(ref(db, '/users/' + session.uid), (snapshot) => {
-            rezult = snapshot.val().snake_numbers;
-            
-            if (rezult < points) 
-            {
-                update(ref(db, 'users/' + session.uid),{ 
-                    snake_numbers: points
-                })
-                document.getElementById("record").innerText = "Это новый рекорд!";
-            }
-            document.getElementById("res").innerText = dub_points;
-            document.getElementById('number_block').classList.add('block');
-            document.getElementById('window').classList.remove('d_none');
-            // обнуляем данные
-            points = 0;
-            divPoints.innerText = "";
-            startGameBool = false;
-        });
-        document.getElementById('body2').classList.add("d_none");
-        document.getElementById('start_continue').innerText = "Начать"
+        death_heards = 0;
+        endGame();
     }
 })
 
@@ -84,6 +66,7 @@ document.getElementById('okey').addEventListener('click', () => {
 
 
 // Переменные для хранения текущих классов блоков и флага нажатия ЛКМ
+let countBlock_help = 0;
 let cellClasses = [];
 let isMouseDown = false;
 let relatedTargetCoords = {                
@@ -96,22 +79,15 @@ document.getElementById('game-board').addEventListener('mouseup', () => {
     if (startGameBool && isMouseDown) 
         {
             isMouseDown = false;
-            for(let i = 0; i < cellClasses.length; i++)
-            {
-                cellClasses[i].classList.remove("dop");
-            }
-
+            
             // если цепочка от 1 до 10
             if (orderBool(cellClasses))
-            {
+            {  
                 for(let x = 0; x<cellClasses.length; x++)
                 {
-                    points += x+1;
-                    cellClasses[x].innerText = "";
-                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
+                    points += 1;
+                    countBlock_help += 1; 
                 }
-
-                fillingMatrix();
             }
 
             // если цепочка одинаковая
@@ -120,14 +96,18 @@ document.getElementById('game-board').addEventListener('mouseup', () => {
                 for(let x = 0; x<cellClasses.length; x++)
                 {
                     points += 1;
-                    cellClasses[x].innerText = "";
-                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
+                    countBlock_help += 1; 
                 }
-
-                fillingMatrix();
             }
 
             divPoints.innerText = "Очки: " + points;
+
+            countChain -= 1;
+            hod.innerText = "Ходов: " + countChain;
+            if (countChain === 0 || countBlock_help >= countBlock)
+            {
+                check();
+            }
             
         }
         cellClasses = [];
@@ -139,48 +119,18 @@ cellNodes.forEach(block => {
     // нажатие ЛКМ и удерживание
     block.addEventListener('mousedown', (event) => {
         if (startGameBool) 
-        {
-            
-            isMouseDown = false;
-            for(let i = 0; i < cellClasses.length; i++)
-            {
-                cellClasses[i].classList.remove("dop");
-            }
-
-            // если цепочка от 1 до 10
-            if (orderBool(cellClasses))
-            {
-                for(let x = 0; x<cellClasses.length; x++)
-                {
-                    points += x+1;
-                    cellClasses[x].innerText = "";
-                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
-                }
-
-                fillingMatrix();
-            }
-
-            // если цепочка одинаковая
-            if (duplicateBool(cellClasses))
-            {
-                for(let x = 0; x<cellClasses.length; x++)
-                {
-                    points += 1;
-                    cellClasses[x].innerText = "";
-                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
-                }
-
-                fillingMatrix();
-            }
-
-            divPoints.innerText = "Очки: " + points;
-            
+        {            
         
             cellClasses = [];
 
             isMouseDown = true;
-            cellClasses.push(event.target);
-            event.target.classList.add("dop");
+            // проверка на повторное наведение на блок
+            if ((cellClasses.indexOf(event.target) === -1) && (event.target.className.indexOf("dop") === -1))
+            {
+                cellClasses.push(event.target);  
+                event.target.classList.add("dop");    
+            } 
+            
         }
     });
 
@@ -190,7 +140,7 @@ cellNodes.forEach(block => {
             if (isMouseDown) {      
                  
                 // получаем координаты откуда увели мышь
-                relatedTargetCoords = findCoordinates(event.target, matrix);  
+                relatedTargetCoords = findCoordinates(event.target, matrix); 
                      
             }
         }    
@@ -199,27 +149,30 @@ cellNodes.forEach(block => {
     // при зажатой ЛКМ перемещение (наведение на блок)
     block.addEventListener('mouseover', (event) => {
         if (startGameBool){
-            if (isMouseDown) {      
-                // проверка на повторное наведение на блок
-                if (cellClasses.indexOf(event.target) === -1)
-                {
-                    cellClasses.push(event.target);  
-                    event.target.classList.add("dop");    
-                } 
+            if (isMouseDown) { 
+
                 // получаем координаты куда навели мышь
                 let targetCoords = findCoordinates(event.target, matrix); 
                 // проверяем, возможно ли движение
                 let isValid = isValidForSwap(targetCoords, relatedTargetCoords);
-
+                
                 // если движение не возможно
-                if (!isValid){
+                if ((!isValid) || (event.target.className.indexOf("dop") > -1) && (cellClasses.indexOf(event.target) === -1)){
                     isMouseDown = false;
                     for(let i = 0; i < cellClasses.length; i++)
                     {
                         cellClasses[i].classList.remove("dop");
                     }
                     cellClasses = [];
-                }     
+                }
+                
+                // проверка на повторное наведение на блок
+                else if ((cellClasses.indexOf(event.target) === -1) && (event.target.className.indexOf("dop") === -1))
+                {
+                    cellClasses.push(event.target);  
+                    event.target.classList.add("dop");    
+                }
+               
             }
         }    
     });
@@ -229,38 +182,47 @@ cellNodes.forEach(block => {
         if (startGameBool) 
         {
             isMouseDown = false;
-            for(let i = 0; i < cellClasses.length; i++)
-            {
-                cellClasses[i].classList.remove("dop");
-            }
 
             // если цепочка от 1 до 10
             if (orderBool(cellClasses))
             {
                 for(let x = 0; x<cellClasses.length; x++)
                 {
-                    points += x+1;
-                    cellClasses[x].innerText = "";
-                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
+                    points += 1;
+                    countBlock_help += 1; 
                 }
-
-                fillingMatrix();
             }
-
             // если цепочка одинаковая
-            if (duplicateBool(cellClasses))
+            else if (duplicateBool(cellClasses))
             {
                 for(let x = 0; x<cellClasses.length; x++)
                 {
                     points += 1;
-                    cellClasses[x].innerText = "";
-                    cellClasses[x].classList.remove(getNameColorClass(cellClasses[x])); 
+                    countBlock_help += 1; 
+                }             
+            }
+            else 
+            {
+                for(let i = 0; i < cellClasses.length; i++)
+                {
+                    cellClasses[i].classList.remove("dop");
                 }
-
-                fillingMatrix();
             }
 
+
             divPoints.innerText = "Очки: " + points;
+
+            if (cellClasses.length !== 0) 
+            {
+                countChain -= 1;
+            }
+            hod.innerText = "Ходов: " + countChain;
+
+            if (countChain === 0 || countBlock_help >= countBlock)
+            {
+                check();
+
+            }
             
         }
         cellClasses = [];
@@ -307,7 +269,7 @@ function getChainBool()
 // получаем длину генерируемой цепочки
 function getLengthChain() 
 {
-    return getRandomNumber(3, 11);
+    return getRandomNumber(2, 11);
     
 }
 
@@ -347,6 +309,7 @@ function clearInnerText()
         for(let x = 0; x < matrix[y].length; x++)
         {
             matrix[y][x].innerText = "";
+            matrix[y][x].classList.remove("dop");
             let name = getNameColorClass(matrix[y][x]);
             if (name !== "") matrix[y][x].classList.remove(name);
         }
@@ -373,7 +336,7 @@ function orderBool(cellClasses)
     {
         return false;
     }
-    if (cellClasses.length < 3)
+    if (cellClasses.length < 2)
     {
         return false;
     }
@@ -397,7 +360,7 @@ function orderBool(cellClasses)
 // проверка цепочки - это цепочка из одинаковых элементов?
 function duplicateBool(cellClasses)
 {
-    if (cellClasses.length < 3)
+    if (cellClasses.length < 2)
     {
         return false;
     }
@@ -414,6 +377,10 @@ function duplicateBool(cellClasses)
 // заполнение матрицы
 function fillingMatrix()
 {
+    clearInnerText();
+    countBlock = 0;
+    countChain = 0;
+
     for(let y = 0; y < matrix.length; y++)
     {
         for(let x = 0; x < matrix[y].length; x++)
@@ -431,23 +398,33 @@ function fillingMatrix()
                         matrix[y1][x1].innerText = numberArray[i];
                         matrix[y1][x1].classList.add(numberArray[i]);
 
+                        
+                        countBlock +=1;
+                        if (i == 1) { countChain += 1;}
+
                         let arrChain = getPositions(x1, y1);
                         if (arrChain.length !== 0)
                         { 
                             let str = arrChain[getRandomNumber(0, arrChain.length)];
                             let res = str.split(' ');
                             x1 = parseInt(res[1], 10);
-                            y1 = parseInt(res[0], 10);
-                            
+                            y1 = parseInt(res[0], 10);                         
 
                         }
-                        else break;
+                        else
+                        {
+                            if (i == 0) { countBlock -=1;}
+                            break;
+                        }
                     }
                 }             
                 else 
                 {
                     let num = getRandomNumber(0, numberArray.length);
                     let lengthChain = getLengthChain();
+
+                    // укорачиваем цепочку из одинаковых блоков
+                    if (lengthChain >= 7) {lengthChain /= 2;}
                     
                     let x1 = x;
                     let y1 = y;
@@ -457,22 +434,30 @@ function fillingMatrix()
                         matrix[y1][x1].innerText = numberArray[num];
                         matrix[y1][x1].classList.add(numberArray[num]);
 
+                        
+                        countBlock +=1;
+                        if (i == 1) { countChain += 1;}
+
                         let arrChain = getPositions(x1, y1);
                         if (arrChain.length !== 0)
                         { 
                             let str = arrChain[getRandomNumber(0, arrChain.length)];
                             let res = str.split(' ');
                             x1 = parseInt(res[1], 10);
-                            y1 = parseInt(res[0], 10);
-                            
+                            y1 = parseInt(res[0], 10);                            
 
                         }
-                        else break;
+                        else 
+                        {
+                            if (i == 0) { countBlock -=1;}
+                            break;
+                        }
                     }
                 }  
             }
         }
     }
+    hod.innerText = "Ходов: " + countChain;
 }
 
 // вычисляем координаты нажимаемой ячейки
@@ -493,4 +478,107 @@ function isValidForSwap(coosds1, coosds2){
     const diffY = Math.abs(coosds1.y - coosds2.y);
 
     return (diffX === 1 || diffY === 1) && (coosds1.x == coosds2.x || coosds1.y == coosds2.y);
+}
+
+// функция задержки
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// проверка при использовании ходов или собирании всех возможных блоков
+function check() {
+    if (countBlock_help >= countBlock) 
+    {
+        chat.innerText = "Ты молодец!";
+        countBlock_help = 0;
+        points += 100;
+        divPoints.innerText = "Очки: " + points;
+        containerNode.classList.add("block");
+        document.getElementById("header_2").classList.add("TrueRes");
+        sleep(3000).then(() => { 
+            chat.innerText = "";
+            fillingMatrix();
+            containerNode.classList.remove("block");
+            document.getElementById("header_2").classList.remove("TrueRes");
+        });
+        
+    }
+    else 
+    {
+        death_heards += 1;
+        if (death_heards < heards)
+        {
+            let live_heard = document.getElementById("live_" + death_heards);
+            let death_heard = document.getElementById("death_" + death_heards);
+            live_heard.classList.add("d_none");
+            death_heard.classList.remove("d_none");
+
+            document.getElementById('start_continue').classList.add("block");
+
+            chat.innerText = "Можно было лучше...";
+            countBlock_help = 0;
+            containerNode.classList.add("block");
+            document.getElementById("header_2").classList.add("FalseRes");
+            sleep(3000).then(() => { 
+                chat.innerText = "";
+                document.getElementById('start_continue').classList.remove("block");
+                fillingMatrix();
+                containerNode.classList.remove("block");
+                document.getElementById("header_2").classList.remove("FalseRes");
+        });
+        }
+        if (death_heards >= heards)
+        {
+            death_heards = 0;
+            endGame();
+        }
+
+        
+    }    
+}
+
+// алгоритм конца игры
+function endGame() {
+
+    countChain = 0;
+    countBlock = 0;
+
+    // очищаем поле
+    clearInnerText();
+    
+    // отправляем результат в базу
+    let rezult = 0;
+    let dub_points = points;
+    document.getElementById("record").innerText = "";
+
+    // записываем результат в бд
+    onValue(ref(db, '/users/' + session.uid), (snapshot) => {
+        rezult = snapshot.val().snake_numbers;
+        
+        if (rezult < points) 
+        {
+            update(ref(db, 'users/' + session.uid),{ 
+                snake_numbers: points
+            })
+            document.getElementById("record").innerText = "Это новый рекорд!";
+        }
+        document.getElementById("res").innerText = dub_points;
+        document.getElementById('number_block').classList.add('block');
+        document.getElementById('window').classList.remove('d_none');
+        // обнуляем данные
+        points = 0;
+        divPoints.innerText = "";
+        startGameBool = false;
+    });
+
+    for(let a = 1; a<=heards; a++)
+    {
+        let live_heard = document.getElementById("live_" + a);
+        let death_heard = document.getElementById("death_" + a);
+        live_heard.classList.remove("d_none");
+        death_heard.classList.add("d_none");
+    }
+
+    document.getElementById('body2').classList.add("d_none");
+    document.getElementById('start_continue').innerText = "Начать"
 }
