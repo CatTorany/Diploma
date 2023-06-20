@@ -9,10 +9,11 @@ body {
     align-items: center;
     /* height: 100vh; */
     font-family: 'VT323', monospace;
+    user-select: none;
 }
 
 .body2 {
-    padding: 0.5svmin;
+    padding: 0.5vmin;
     margin-bottom: 1vmin;
     background-color: rgba(137, 127, 127, 0.6);
     border-radius: 2vmin;
@@ -21,8 +22,35 @@ body {
     text-align: center;
 }
 
-#points {
+#points, #hod, #chat{
     font-size: 3vmin;
+    float: left;
+    margin-right: 2vmin;
+}
+#hod {
+    margin-left: 1vmin;
+}
+
+.header_2 {
+    height: 5vmin;
+    border-radius: 2vmin;
+}
+.hearts {
+    float: right;
+    background: #3d43bd9a;
+    border-radius: 2vmin;
+}
+.heart {
+    display: inline-block;
+    /* border: 1vmin solid rgba(146, 159, 230, 0.603); */
+    width: 5vmin;
+    height: 5vmin;
+    
+}
+
+.live, .death {
+    width: 5vmin;
+    height: 5vmin;  
 }
 
 .back{
@@ -45,8 +73,8 @@ body {
     margin-bottom: 0.5vmin;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(6, 13vmin);
-    grid-template-rows: repeat(6, 13vmin);
+    grid-template-columns: repeat(6, 13.5vmin);
+    grid-template-rows: repeat(6, 13.5vmin);
     gap: 0.5vmin;
     border-radius: 1vmin;
 }
@@ -83,8 +111,16 @@ h1 {
     width: 79vmin;
     text-align: center;
     color: white;
-    font-size: 5vmin;
+    font-size: 4vmin;
     margin: 1vmin;
+}
+
+h3 {
+    width: 79vmin;
+    text-align: left;
+    color: white;
+    font-size: 2vmin;
+    margin: 1vmin; 
 }
 
 
@@ -186,4 +222,14 @@ h2 {
 
 .okey:hover {
     background-color: rgba(168, 113, 212, 0.822);
+}
+
+.TrueRes {
+    background-color: rgba(172, 255, 47, 0.466);
+    filter: brightness(100%);
+}
+
+.FalseRes {
+    background-color: rgba(255, 0, 0, 0.445);
+    filter: brightness(100%);
 }
